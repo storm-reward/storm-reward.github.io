@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>字符串转换</title>
+  </head>
+  <body>
+    <input id="str" placeholder="输入字符串" />
+    <button onclick="handle()">转换</button>
+    <div>
+      <text id="resultStr"></text>
+    </div>
+    <script>
+      var inputElement = document.getElementById('str');
+      var resultStrElement = document.getElementById('resultStr');
+
+      function handle() {
+        var value = inputElement.value;
+        var result = transfer(value);
+        resultStrElement.innerHTML = result;
+      }
+
+      function transfer(result) {
+        result = result.replace(/\,+/g, ':');
+        result = result.replace(/\n/g, ' ');
+        result = result.replace(/\d+\s(\d)/g, '$1');
+        result = result.replace(/:(\d{3})/g, (str, $1) => {
+          const ms = $1.substr(0, 2);
+          return `:${ms}`;
+        });
+
+        return result;
+      }
+    </script>
+  </body>
+</html>
